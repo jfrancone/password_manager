@@ -1,4 +1,5 @@
 import tkinter
+from tkinter import messagebox
 
 class Engine():
     def __init__(self):
@@ -53,12 +54,19 @@ class Engine():
         print("Generating Password")
 
     def add(self):
+        print("Add Button Has Been Clicked")
         self.website = self.website_entry.get()
         self.username = self.username_entry.get()
         self.password = self.password_entry.get()
         print(f"Website = {self.website}, Username = {self.username}, Password = {self.password}")
-        with open("data.txt", mode = "a") as file:
-            file.write(f"{self.website} | {self.username} | {self.password}\n")
-        self.website_entry.delete(0, 'end')
-        self.password_entry.delete(0, 'end')
+        if (len(self.website) == 0) or (len(self.username) == 0) or (len(self.password) == 0):
+            messagebox.showerror(title = "Input Error", message = "Do not leave any fields empty")
+        else:    
+            is_ok = messagebox.askokcancel(title = self.website, message = f"Is this correct? \n Website = {self.website}, Username = {self.username}, Password = {self.password} \n Click 'ok' if ready to save")
+            #is_ok will be saved as a bullion yes or no
+            if is_ok:
+                with open("data.txt", mode = "a") as file:
+                    file.write(f"{self.website} | {self.username} | {self.password}\n")
+                self.website_entry.delete(0, 'end')
+                self.password_entry.delete(0, 'end')
 
