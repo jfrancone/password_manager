@@ -58,4 +58,6 @@ class Engine():
         print(f"Website = {website}, Username = {username}, Password = {password}")
         with open("data.txt", mode = "a") as file:
             file.write(f"{website} | {username} | {password}\n")
+        self.website_entry.delete(0, 'end')
+        self.password_entry.delete(0, 'end')
 
