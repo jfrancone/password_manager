@@ -46,18 +46,19 @@ class Engine():
 
     #Functions
     def run(self):
+        #print("Entering Main Loop...")
         self.window.mainloop()
 
     def generate(self):
         print("Generating Password")
 
     def add(self):
-        website = self.website_entry.get()
-        username = self.username_entry.get()
-        password = self.password_entry.get()
-        print(f"Website = {website}, Username = {username}, Password = {password}")
+        self.website = self.website_entry.get()
+        self.username = self.username_entry.get()
+        self.password = self.password_entry.get()
+        print(f"Website = {self.website}, Username = {self.username}, Password = {self.password}")
         with open("data.txt", mode = "a") as file:
-            file.write(f"{website} | {username} | {password}\n")
+            file.write(f"{self.website} | {self.username} | {self.password}\n")
         self.website_entry.delete(0, 'end')
         self.password_entry.delete(0, 'end')
 
