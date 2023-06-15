@@ -2,6 +2,7 @@ import tkinter
 from tkinter import messagebox
 from password_generator import generate
 import pyperclip
+import json
 
 class Engine():
     def __init__(self):
@@ -57,17 +58,30 @@ class Engine():
         self.website = self.website_entry.get()
         self.username = self.username_entry.get()
         self.password = self.password_entry.get()
+        new_data = {
+            self.website:{
+                "email": self.username,
+                "password": self.password,
+
+        }}
         print(f"Website = {self.website}, Username = {self.username}, Password = {self.password}")
         if (len(self.website) == 0) or (len(self.username) == 0) or (len(self.password) == 0):
             messagebox.showerror(title = "Input Error", message = "Do not leave any fields empty")
         else:    
-            is_ok = messagebox.askokcancel(title = self.website, message = f"Is this correct? \n Website = {self.website}, Username = {self.username}, Password = {self.password} \n Click 'ok' if ready to save")
-            #is_ok will be saved as a boolean yes or no
-            if is_ok:
-                with open("data.txt", mode = "a") as file:
-                    file.write(f"{self.website} | {self.username} | {self.password}\n")
-                self.website_entry.delete(0, 'end')
-                self.password_entry.delete(0, 'end')
+            try:
+                with open("data.json", mode = "r") as file:
+                    #dumps this info (new_data dictionary) into the json file
+                    data = json.load(file)
+                    data.update(new_data)
+            except FileNotFoundError:
+                with open("data.json", mode = 'w') as file:
+                    json.dump(new_data, file, indent = 4)
+            else:
+                with open("data.json", mode = 'w') as file:
+                    json.dump(data, file, indent = 4)
+
+            self.website_entry.delete(0, 'end')
+            self.password_entry.delete(0, 'end')
 
     def generate_password(self):
         self.password_entry.delete(0, 'end')

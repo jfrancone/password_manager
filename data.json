@@ -1,0 +1,10 @@
+{
+    "Amazon": {
+        "email": "jfrancone@sandiego.edu",
+        "password": "123"
+    },
+    "ebay": {
+        "email": "jfrancone@sandiego.edu",
+        "password": "password"
+    }
+}
