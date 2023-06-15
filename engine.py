@@ -1,5 +1,6 @@
 import tkinter
 from tkinter import messagebox
+from password_generator import generate
 
 class Engine():
     def __init__(self):
@@ -35,7 +36,7 @@ class Engine():
         self.password_entry.grid(column = 1, row = 3)
         
         #Buttons
-        self.password_generator = tkinter.Button(text = "Generate Password", command = self.generate)
+        self.password_generator = tkinter.Button(text = "Generate Password", command = self.generate_password)
         self.password_generator.grid(column = 2, row = 3)
         self.add_button = tkinter.Button(text = "Add", command = self.add)
         self.add_button.grid(column = 1, row = 4, columnspan = 2)
@@ -49,9 +50,6 @@ class Engine():
     def run(self):
         #print("Entering Main Loop...")
         self.window.mainloop()
-
-    def generate(self):
-        print("Generating Password")
 
     def add(self):
         print("Add Button Has Been Clicked")
@@ -69,4 +67,10 @@ class Engine():
                     file.write(f"{self.website} | {self.username} | {self.password}\n")
                 self.website_entry.delete(0, 'end')
                 self.password_entry.delete(0, 'end')
+
+    def generate_password(self):
+        self.password_entry.delete(0, 'end')
+        password = generate()
+        self.password = password
+        self.password_entry.insert(0, password)
 
