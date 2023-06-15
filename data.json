@@ -1,10 +1,14 @@
 {
-    "Amazon": {
+    "amazon": {
         "email": "jfrancone@sandiego.edu",
         "password": "123"
     },
-    "ebay": {
+    "facebook": {
         "email": "jfrancone@sandiego.edu",
         "password": "password"
+    },
+    "ebay": {
+        "email": "jfrancone@sandiego.edu",
+        "password": "kq(SV635lVl&T"
     }
 }

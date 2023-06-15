@@ -30,7 +30,7 @@ class Engine():
         #Entries
         self.website_entry = tkinter.Entry(width = 35)
         self.website_entry.focus()
-        self.website_entry.grid(column = 1, row = 1, columnspan=2)
+        self.website_entry.grid(column = 1, row = 1, columnspan = 2)
         self.username_entry = tkinter.Entry(width = 35)
         self.username_entry.insert(0,"jfrancone@sandiego.edu")
         self.username_entry.grid(column = 1, row = 2, columnspan=2)
@@ -38,6 +38,8 @@ class Engine():
         self.password_entry.grid(column = 1, row = 3)
         
         #Buttons
+        self.search_button = tkinter.Button(text = "Search", command = self.search)
+        self.search_button.grid(column = 2, row = 1)
         self.password_generator = tkinter.Button(text = "Generate Password", command = self.generate_password)
         self.password_generator.grid(column = 2, row = 3)
         self.add_button = tkinter.Button(text = "Add", command = self.add)
@@ -91,4 +93,26 @@ class Engine():
         pyperclip.copy(password)
         messagebox.showinfo(title=None, message = "Your Password has been copied to your clipboard!")
 
+    def search(self):
+        empty_dict = {}
+        self.website = self.website_entry.get()
+        try:
+            with open("data.json", mode = 'r') as file:
+                data = json.load(file)
+                print(data)
+        except FileNotFoundError:
+            messagebox.showerror(title = "Error", message = "No Data File Found")
+            with open("data.json", mode = 'w') as file:
+                json.dump(empty_dict, file, indent = 4)
+        except json.decoder.JSONDecodeError:
+            messagebox.showerror(title = "Error", message = "No details for the website exist")
+        else:
+            try:
+                pw_info = data[self.website]
+                print(pw_info)
+                email = pw_info['email']
+                password = pw_info['password']
+                messagebox.showinfo(title = "Password Info", message = f"Website = {self.website} \n Email/Username = {email} \n Password = {password}")
 
+            except KeyError:
+                messagebox.showerror(title = "Error", message = "No details for the website exist")
