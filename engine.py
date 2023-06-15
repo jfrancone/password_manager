@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import messagebox
 from password_generator import generate
+import pyperclip
 
 class Engine():
     def __init__(self):
@@ -61,7 +62,7 @@ class Engine():
             messagebox.showerror(title = "Input Error", message = "Do not leave any fields empty")
         else:    
             is_ok = messagebox.askokcancel(title = self.website, message = f"Is this correct? \n Website = {self.website}, Username = {self.username}, Password = {self.password} \n Click 'ok' if ready to save")
-            #is_ok will be saved as a bullion yes or no
+            #is_ok will be saved as a boolean yes or no
             if is_ok:
                 with open("data.txt", mode = "a") as file:
                     file.write(f"{self.website} | {self.username} | {self.password}\n")
@@ -73,4 +74,7 @@ class Engine():
         password = generate()
         self.password = password
         self.password_entry.insert(0, password)
+        pyperclip.copy(password)
+        messagebox.showinfo(title=None, message = "Your Password has been copied to your clipboard!")
+
 
