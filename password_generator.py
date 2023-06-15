@@ -10,16 +10,10 @@ nr_numbers = random.randint(2, 4)
 
 def generate():
     print("Generating Password")
-    password_list = []
-
-    for char in range(nr_letters):
-        password_list.append(random.choice(letters))
-
-    for char in range(nr_symbols):
-        password_list += random.choice(symbols)
-
-    for char in range(nr_numbers):
-        password_list += random.choice(numbers)
+    password_letters = [random.choice(letters) for item in range(nr_letters)]
+    password_numbers = [random.choice(numbers) for item in range(nr_numbers)]
+    password_symbols = [random.choice(symbols) for item in range(nr_symbols)]
+    password_list = password_letters + password_symbols + password_numbers
 
     random.shuffle(password_list)
 
