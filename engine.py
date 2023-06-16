@@ -28,13 +28,13 @@ class Engine():
         self.password_label.grid(column = 0, row = 3)
         
         #Entries
-        self.website_entry = tkinter.Entry(width = 35)
+        self.website_entry = tkinter.Entry(width =35)
         self.website_entry.focus()
-        self.website_entry.grid(column = 1, row = 1, columnspan = 2)
+        self.website_entry.grid(column = 1, row = 1)
         self.username_entry = tkinter.Entry(width = 35)
         self.username_entry.insert(0,"jfrancone@sandiego.edu")
-        self.username_entry.grid(column = 1, row = 2, columnspan=2)
-        self.password_entry = tkinter.Entry(width = 17)
+        self.username_entry.grid(column = 1, row = 2)
+        self.password_entry = tkinter.Entry(width = 35)
         self.password_entry.grid(column = 1, row = 3)
         
         #Buttons
@@ -43,7 +43,7 @@ class Engine():
         self.password_generator = tkinter.Button(text = "Generate Password", command = self.generate_password)
         self.password_generator.grid(column = 2, row = 3)
         self.add_button = tkinter.Button(text = "Add", command = self.add)
-        self.add_button.grid(column = 1, row = 4, columnspan = 2)
+        self.add_button.grid(column = 1, row = 4)
         
         #Attributes
         self.website = None
@@ -101,7 +101,7 @@ class Engine():
                 data = json.load(file)
                 print(data)
         except FileNotFoundError:
-            messagebox.showerror(title = "Error", message = "No Data File Found")
+            messagebox.showerror(title = "Error", message = "No Data File Found. \n File is being Added.")
             with open("data.json", mode = 'w') as file:
                 json.dump(empty_dict, file, indent = 4)
         except json.decoder.JSONDecodeError:
