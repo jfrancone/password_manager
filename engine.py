@@ -57,7 +57,7 @@ class Engine():
 
     def add(self):
         print("Add Button Has Been Clicked")
-        self.website = self.website_entry.get()
+        self.website = (self.website_entry.get()).lower()
         self.username = self.username_entry.get()
         self.password = self.password_entry.get()
         new_data = {
@@ -95,7 +95,7 @@ class Engine():
 
     def search(self):
         empty_dict = {}
-        self.website = self.website_entry.get()
+        self.website = (self.website_entry.get()).lower()
         try:
             with open("data.json", mode = 'r') as file:
                 data = json.load(file)
