@@ -107,12 +107,12 @@ class Engine():
         except json.decoder.JSONDecodeError:
             messagebox.showerror(title = "Error", message = "No details for the website exist")
         else:
-            try:
+            if self.website in data:
                 pw_info = data[self.website]
                 print(pw_info)
                 email = pw_info['email']
                 password = pw_info['password']
                 messagebox.showinfo(title = "Password Info", message = f"Website = {self.website} \n Email/Username = {email} \n Password = {password}")
 
-            except KeyError:
+            else:
                 messagebox.showerror(title = "Error", message = "No details for the website exist")
